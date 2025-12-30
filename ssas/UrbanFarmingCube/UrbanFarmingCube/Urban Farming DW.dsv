@@ -1,0 +1,291 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="90e0b08b-656a-474c-afb9-35f24b6d668e" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>Urban Farming DW</ID>
+  <Name>Urban Farming DW</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout />
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>0</DiagramViewPortLeft>
+            <DiagramViewPortTop>0</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>100</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>Urban Farming DW</DataSourceID>
+  <Schema>
+    <xs:schema id="Urban_x0020_Farming_x0020_DW" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="Urban_x0020_Farming_x0020_DW" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="ddcb974e-546d-4629-b6f9-325ad96770dc">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_Dim_Crop" msprop:DbTableName="Dim_Crop" msprop:FriendlyName="Dim_Crop" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="228bb223-85e7-474e-acba-4ed6ec9ed7c3">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="crop_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="crop_id" msprop:DbColumnName="crop_id" msprop:design-time-name="d1ebcc68-8aa3-432c-a884-60548c171481" type="xs:int" />
+                  <xs:element name="crop_type" msprop:FriendlyName="crop_type" msprop:DbColumnName="crop_type" msprop:design-time-name="84400f15-803c-4f5f-a03c-974dbfd7408d">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="price_per_kg_EUR" msprop:FriendlyName="price_per_kg_EUR" msprop:DbColumnName="price_per_kg_EUR" msprop:design-time-name="cd6214d6-4362-4ba0-8ab7-3c093bb9a389" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="0144384f-19da-4aa6-8b91-84d6e4eac187" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Disease" msprop:DbTableName="Dim_Disease" msprop:FriendlyName="Dim_Disease" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="14447903-8e77-4e85-b43b-09e8a89bb583">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="disease_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="disease_id" msprop:DbColumnName="disease_id" msprop:design-time-name="3d821566-7b73-4851-a920-b3e80c2db448" type="xs:int" />
+                  <xs:element name="disease_status" msprop:FriendlyName="disease_status" msprop:DbColumnName="disease_status" msprop:design-time-name="148b0adc-243d-48f9-93b3-a4dd00abc071">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="751a2fff-a04a-4605-a2f5-fae57aece546" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Irrigation" msprop:DbTableName="Dim_Irrigation" msprop:FriendlyName="Dim_Irrigation" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="c337a204-698e-4be4-9cde-34c11c924dee">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="irrigation_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="irrigation_id" msprop:DbColumnName="irrigation_id" msprop:design-time-name="51ee9fa1-38fd-4b7c-add4-08273b213c30" type="xs:int" />
+                  <xs:element name="irrigation_type" msprop:FriendlyName="irrigation_type" msprop:DbColumnName="irrigation_type" msprop:design-time-name="45ef34db-62c5-4a79-b14f-d6797d03db45">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="814e2cf1-9269-48db-92c0-416d8d9a3af8" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Region" msprop:DbTableName="Dim_Region" msprop:FriendlyName="Dim_Region" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="2e8ae004-4601-44e1-8a43-411d30a10a97">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="region_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="region_id" msprop:DbColumnName="region_id" msprop:design-time-name="73d21771-51f0-4339-a484-354ac429dbea" type="xs:int" />
+                  <xs:element name="region_name" msprop:FriendlyName="region_name" msprop:DbColumnName="region_name" msprop:design-time-name="d561b84b-d7ad-47a4-9180-305f764d97a0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="country" msprop:FriendlyName="country" msprop:DbColumnName="country" msprop:design-time-name="5413c0af-bced-4ca7-bae8-537a14d80792" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="3264af41-25a0-49fe-a691-d907c3b4771a" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_Time" msprop:DbTableName="Dim_Time" msprop:FriendlyName="Dim_Time" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="971fda50-b40a-4a06-8e93-97783ca37552">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="time_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="time_id" msprop:DbColumnName="time_id" msprop:design-time-name="e3ab1565-615a-4d6f-84b0-845ae31ce0c0" type="xs:int" />
+                  <xs:element name="full_date" msprop:FriendlyName="full_date" msprop:DbColumnName="full_date" msprop:design-time-name="3ad7bb4b-9b83-4cea-8e1b-a062b81a6869">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="year" msprop:FriendlyName="year" msprop:DbColumnName="year" msprop:design-time-name="b21d7681-059f-4881-8828-2b8551c26d0a" type="xs:int" minOccurs="0" />
+                  <xs:element name="month" msprop:FriendlyName="month" msprop:DbColumnName="month" msprop:design-time-name="04e60a21-65e4-43f9-9000-694791adf709" type="xs:int" minOccurs="0" />
+                  <xs:element name="day" msprop:FriendlyName="day" msprop:DbColumnName="day" msprop:design-time-name="714d114c-beda-4d3d-8bbe-f486db458157" type="xs:int" minOccurs="0" />
+                  <xs:element name="quarter" msprop:FriendlyName="quarter" msprop:DbColumnName="quarter" msprop:design-time-name="71038acf-5995-447b-9d0b-8cc9101ebb55" type="xs:int" minOccurs="0" />
+                  <xs:element name="month_name" msprop:FriendlyName="month_name" msprop:DbColumnName="month_name" msprop:design-time-name="6bbdface-9b72-46a6-a1f2-1895b9c5be26" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="season" msprop:FriendlyName="season" msprop:DbColumnName="season" msprop:design-time-name="396e20c8-8113-4769-976f-3af69cf2be8d" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="ae27d300-f548-4bc9-926e-2e97b4781a9e" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_CommodityPrices" msprop:DbTableName="Fact_CommodityPrices" msprop:FriendlyName="Fact_CommodityPrices" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="aa77925c-54d0-4622-a7c5-8876ae0b2db9">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="price_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="price_id" msprop:DbColumnName="price_id" msprop:design-time-name="9e80f2ae-3ee5-4d0a-a56a-94c0dcdbe488" type="xs:int" />
+                  <xs:element name="time_id" msprop:FriendlyName="time_id" msprop:DbColumnName="time_id" msprop:design-time-name="0c2a3052-85a4-4ff6-a2e8-26a439a80fe3" type="xs:int" minOccurs="0" />
+                  <xs:element name="price_date" msprop:FriendlyName="price_date" msprop:DbColumnName="price_date" msprop:design-time-name="6024ca5a-eff9-405f-9278-ff8a879b8cdc">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="corn_eur_per_kg" msprop:FriendlyName="corn_eur_per_kg" msprop:DbColumnName="corn_eur_per_kg" msprop:design-time-name="0834137c-3369-4728-86ce-6d11377a4b5b" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="wheat_eur_per_kg" msprop:FriendlyName="wheat_eur_per_kg" msprop:DbColumnName="wheat_eur_per_kg" msprop:design-time-name="256db41f-d3a6-4098-b75b-e71774cfed62" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="soybean_eur_per_kg" msprop:FriendlyName="soybean_eur_per_kg" msprop:DbColumnName="soybean_eur_per_kg" msprop:design-time-name="116a3f5c-2a2a-481f-b692-e682ac5905b8" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="cotton_eur_per_kg" msprop:FriendlyName="cotton_eur_per_kg" msprop:DbColumnName="cotton_eur_per_kg" msprop:design-time-name="1abd7f54-d630-4bc3-b130-de2173c57338" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="rice_eur_per_kg" msprop:FriendlyName="rice_eur_per_kg" msprop:DbColumnName="rice_eur_per_kg" msprop:design-time-name="32e66015-25f0-4565-8f70-a86a0cbc3f01" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="511a2db9-c0da-493e-a9bf-3e7be4c1083c" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_Production" msprop:DbTableName="Fact_Production" msprop:FriendlyName="Fact_Production" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:design-time-name="2e00e42f-c682-411a-b629-8bc17bfaba58">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="production_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:FriendlyName="production_id" msprop:DbColumnName="production_id" msprop:design-time-name="d1f874d3-bcd1-48e0-9a9b-ed1607fc8b42" type="xs:int" />
+                  <xs:element name="farm_id" msprop:FriendlyName="farm_id" msprop:DbColumnName="farm_id" msprop:design-time-name="42856f48-6090-45a4-b390-8ca32d5d7c5c">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="crop_id" msprop:FriendlyName="crop_id" msprop:DbColumnName="crop_id" msprop:design-time-name="fa93372f-2367-4c65-80ce-6c56e5a73308" type="xs:int" minOccurs="0" />
+                  <xs:element name="region_id" msprop:FriendlyName="region_id" msprop:DbColumnName="region_id" msprop:design-time-name="fab0805f-382e-4628-98ce-89e351c98461" type="xs:int" minOccurs="0" />
+                  <xs:element name="irrigation_id" msprop:FriendlyName="irrigation_id" msprop:DbColumnName="irrigation_id" msprop:design-time-name="c106ecac-63c2-469f-902e-45ad98f6e9c2" type="xs:int" minOccurs="0" />
+                  <xs:element name="disease_id" msprop:FriendlyName="disease_id" msprop:DbColumnName="disease_id" msprop:design-time-name="bf28f65d-fc9f-4b37-9527-d38bdc5ae8ad" type="xs:int" minOccurs="0" />
+                  <xs:element name="sowing_time_id" msprop:FriendlyName="sowing_time_id" msprop:DbColumnName="sowing_time_id" msprop:design-time-name="567b68d3-f950-40bc-945c-2f611e58e808" type="xs:int" minOccurs="0" />
+                  <xs:element name="harvest_time_id" msprop:FriendlyName="harvest_time_id" msprop:DbColumnName="harvest_time_id" msprop:design-time-name="14bce4af-6ab4-4e4d-9a26-1df4b270bbbc" type="xs:int" minOccurs="0" />
+                  <xs:element name="sowing_date" msprop:FriendlyName="sowing_date" msprop:DbColumnName="sowing_date" msprop:design-time-name="d10be6d7-b36c-4e21-9d61-9bdfd736464e" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="harvest_date" msprop:FriendlyName="harvest_date" msprop:DbColumnName="harvest_date" msprop:design-time-name="fdfd48d7-b7a0-4d8a-af8a-99b69ebd70d0" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="total_days" msprop:FriendlyName="total_days" msprop:DbColumnName="total_days" msprop:design-time-name="d27c5cff-6efc-4c13-a68c-23bacdad7328" type="xs:int" minOccurs="0" />
+                  <xs:element name="soil_moisture_pct" msprop:FriendlyName="soil_moisture_pct" msprop:DbColumnName="soil_moisture_pct" msprop:design-time-name="bd42eaeb-605b-45e2-a6ac-346aaa270dc6" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="soil_pH" msprop:FriendlyName="soil_pH" msprop:DbColumnName="soil_pH" msprop:design-time-name="be42c871-7d58-44a3-9716-fb8103119ad4" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="temperature_C" msprop:FriendlyName="temperature_C" msprop:DbColumnName="temperature_C" msprop:design-time-name="7ad20dcd-fb06-4326-bd29-b19d8e76f5db" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="rainfall_mm" msprop:FriendlyName="rainfall_mm" msprop:DbColumnName="rainfall_mm" msprop:design-time-name="d44cc2a7-8ae5-4350-b3c6-3bc213eba446" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="humidity_pct" msprop:FriendlyName="humidity_pct" msprop:DbColumnName="humidity_pct" msprop:design-time-name="9bfcd239-6e98-4752-aebf-c84650e9cf86" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="sunlight_hours" msprop:FriendlyName="sunlight_hours" msprop:DbColumnName="sunlight_hours" msprop:design-time-name="dd9d1bc1-d38c-4135-8fa0-06276be7f41a" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="pesticide_usage_ml" msprop:FriendlyName="pesticide_usage_ml" msprop:DbColumnName="pesticide_usage_ml" msprop:design-time-name="af55ba39-0305-4134-a168-5131f651d40d" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="NDVI_index" msprop:FriendlyName="NDVI_index" msprop:DbColumnName="NDVI_index" msprop:design-time-name="b91a5ce2-af7e-415c-b504-2ce563d12654" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="yield_kg_per_hectare" msprop:FriendlyName="yield_kg_per_hectare" msprop:DbColumnName="yield_kg_per_hectare" msprop:design-time-name="a62bed34-fe89-409c-8f35-1de3960a3426" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="price_per_kg_EUR" msprop:FriendlyName="price_per_kg_EUR" msprop:DbColumnName="price_per_kg_EUR" msprop:design-time-name="7e854ab6-f13a-46da-9da8-f7d4e7a3012b" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="revenue_per_hectare_EUR" msprop:FriendlyName="revenue_per_hectare_EUR" msprop:DbColumnName="revenue_per_hectare_EUR" msprop:design-time-name="c9f762a8-2e94-4f0d-951b-bfd3f9102a36" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="yield_per_day" msprop:FriendlyName="yield_per_day" msprop:DbColumnName="yield_per_day" msprop:design-time-name="f719819d-83f4-474c-870b-5132e12ad507" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="water_efficiency" msprop:FriendlyName="water_efficiency" msprop:DbColumnName="water_efficiency" msprop:design-time-name="6603c217-802e-4001-9f89-d47f0e4c0a68" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="growing_conditions_score" msprop:FriendlyName="growing_conditions_score" msprop:DbColumnName="growing_conditions_score" msprop:design-time-name="ec95683b-09d2-48cc-b323-4b155c731422" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="latitude" msprop:FriendlyName="latitude" msprop:DbColumnName="latitude" msprop:design-time-name="1b609c64-0875-46a7-8c6c-78dfcaff2772" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="longitude" msprop:FriendlyName="longitude" msprop:DbColumnName="longitude" msprop:design-time-name="d193ed2b-00a1-4e15-ad09-d2013a1dacd1" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="sensor_id" msprop:FriendlyName="sensor_id" msprop:DbColumnName="sensor_id" msprop:design-time-name="a22d9a61-d991-4e33-9210-fe6424b33f04" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="created_at" msprop:FriendlyName="created_at" msprop:DbColumnName="created_at" msprop:design-time-name="f5482332-611c-4611-8df6-9ff1a4b6a522" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Crop" />
+          <xs:field xpath="crop_id" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Disease_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Disease" />
+          <xs:field xpath="disease_id" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Irrigation_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Irrigation" />
+          <xs:field xpath="irrigation_id" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Region_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Region" />
+          <xs:field xpath="region_id" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_Time_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_Time" />
+          <xs:field xpath="time_id" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_CommodityPrices_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_CommodityPrices" />
+          <xs:field xpath="price_id" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_Production_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="production_id" />
+        </xs:unique>
+        <xs:keyref name="FK__Fact_Prod__regio__5AEE82B9" refer="dbo_Dim_Region_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="region_id" />
+        </xs:keyref>
+        <xs:keyref name="FK__Fact_Prod__sowin__5DCAEF64" refer="dbo_Dim_Time_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="sowing_time_id" />
+        </xs:keyref>
+        <xs:keyref name="FK__Fact_Prod__crop___59FA5E80" refer="Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="crop_id" />
+        </xs:keyref>
+        <xs:keyref name="FK__Fact_Prod__irrig__5BE2A6F2" refer="dbo_Dim_Irrigation_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="irrigation_id" />
+        </xs:keyref>
+        <xs:keyref name="FK__Fact_Prod__disea__5CD6CB2B" refer="dbo_Dim_Disease_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="disease_id" />
+        </xs:keyref>
+        <xs:keyref name="FK__Fact_Prod__harve__5EBF139D" refer="dbo_Dim_Time_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_Production" />
+          <xs:field xpath="harvest_time_id" />
+        </xs:keyref>
+        <xs:keyref name="FK__Fact_Comm__time___52593CB8" refer="dbo_Dim_Time_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_CommodityPrices" />
+          <xs:field xpath="time_id" />
+        </xs:keyref>
+      </xs:element>
+    </xs:schema>
+    <Urban_x0020_Farming_x0020_DW xmlns="" />
+  </Schema>
+</DataSourceView>

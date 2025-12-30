@@ -1,0 +1,70 @@
+feature,importance
+pesticide_efficiency,0.5693716626272867
+pesticide_usage_ml,0.3678402269728121
+water_efficiency,0.046591372304823665
+rainfall_mm,0.014655264458996634
+"region_Nile Delta, Egypt",0.0011526116010017009
+total_days,0.00010018500813020355
+crop_disease_status_No Disease,3.8905011980572134e-05
+temperature_C,3.764361775742911e-05
+soil_moisture_%,3.1237776080103766e-05
+humidity_%,2.8451124500535528e-05
+region_Central USA,2.300992359966779e-05
+soil_pH,2.240122515590989e-05
+NDVI_index,1.559647686824229e-05
+growing_conditions_score,1.2610084774138682e-05
+sunlight_hours,1.2285309245968895e-05
+fertilizer_type_Inorganic,1.1683976048544818e-05
+region_Kenya Highlands,1.0318209632440901e-05
+crop_type_Olives,8.04715694043706e-06
+region_East Africa,6.0287910520511014e-06
+region_North India,4.662348746847626e-06
+irrigation_type_Manual,4.534525886014043e-06
+"region_Queensland, Australia",2.580825746793205e-06
+irrigation_type_No Irrigation,2.3627938199019658e-06
+crop_type_Cotton,1.778659798401676e-06
+crop_type_Soybean,1.743183810703097e-06
+"region_Bavaria, Germany",1.575463528306234e-06
+irrigation_type_Sprinkler,1.4295671058717973e-06
+crop_disease_status_Moderate,1.4214821778603556e-06
+irrigation_type_Drip,1.3074945329431668e-06
+crop_type_Tomatoes,1.0362335510159147e-06
+"region_Fès-Meknès, Morocco",6.332429718858629e-07
+crop_disease_status_Mild,6.296471290969189e-07
+"region_Murray-Darling, Australia",5.844016535769421e-07
+fertilizer_type_Organic,5.281336009854811e-07
+"region_Minas Gerais, Brazil",5.123810373604319e-07
+crop_type_Barley,3.929563760867566e-07
+"region_Rabat-Salé-Kénitra, Morocco",3.821140787963621e-07
+crop_disease_status_Severe,3.8078074582613564e-07
+region_Central Thailand,3.3673846471766425e-07
+"region_Midwest, USA",3.031845957047737e-07
+irrigation_type_Center Pivot,2.6891768234383265e-07
+"region_Java, Indonesia",2.2717282951114503e-07
+crop_type_Rice,2.1716465715210816e-07
+region_South USA,1.640714147626302e-07
+"region_Andalusia, Spain",1.1678478835688018e-07
+"region_Punjab, India",7.792504101481884e-08
+fertilizer_type_Mixed,7.236402387037064e-08
+sowing_season_Spring,5.9448473929647994e-08
+region_South India,5.771491388419646e-08
+irrigation_type_Flood,5.204606313498384e-08
+"region_California, USA",2.8574066487663618e-08
+fertilizer_type_Biofertilizer,0.0
+"region_Marrakech-Safi, Morocco",0.0
+heat_stress,0.0
+region_Nigeria North,0.0
+"region_Casablanca-Settat, Morocco",0.0
+"region_Pampas, Argentina",0.0
+drought_stress,0.0
+"region_Tuscany, Italy",0.0
+"region_Provence, France",0.0
+"region_Tanger-Tétouan, Morocco",0.0
+"region_Shandong, China",0.0
+crop_type_Wheat,0.0
+"region_Souss-Massa, Morocco",0.0
+region_South Africa Cape,0.0
+crop_type_Potatoes,0.0
+crop_type_Maize,0.0
+crop_type_Citrus,0.0
+sowing_season_Winter,0.0

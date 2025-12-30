@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Models (optionnel - décommente si tu veux inclure les modèles)
+# models/*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Airflow
+airflow/logs/
+airflow/*.pid
+airflow/*.err
+airflow/*.out
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (optionnel - décommente si les données sont sensibles)
+# data/*.csv

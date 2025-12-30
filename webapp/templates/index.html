@@ -1,0 +1,249 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - Smart Farming Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">
+                        Smart Farming Analytics Dashboard
+                    </h1>
+                    <p class="lead mb-4">
+                        Leverage machine learning and data analytics to optimize crop yields, 
+                        predict harvest outcomes, and make data-driven farming decisions.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="{{ url_for('predictions') }}" class="btn btn-success btn-lg">
+                            <i class="fas fa-calculator me-2"></i> Try Predictions
+                        </a>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-success btn-lg">
+                            <i class="fas fa-chart-line me-2"></i> View Dashboard
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card hero-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-seedling fa-5x text-success mb-4"></i>
+                            <h3 class="card-title">Real-time Analytics</h3>
+                            <p class="card-text">Monitor and analyze farming data with interactive visualizations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="container py-5">
+        <h2 class="text-center mb-5">Key Statistics</h2>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="stat-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tractor fa-3x text-success mb-3"></i>
+                        <h3 class="display-5 fw-bold">{{ stats.total_farms|default(0) }}</h3>
+                        <p class="text-muted">Total Farms</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+                        <h3 class="display-5 fw-bold">{{ stats.total_crops|default(0) }}</h3>
+                        <p class="text-muted">Crop Types</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-globe fa-3x text-success mb-3"></i>
+                        <h3 class="display-5 fw-bold">{{ stats.total_regions|default(0) }}</h3>
+                        <p class="text-muted">Regions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-weight-hanging fa-3x text-success mb-3"></i>
+                        <h3 class="display-5 fw-bold">{{ stats.avg_yield|default(0) }}</h3>
+                        <p class="text-muted">Avg Yield (kg/ha)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Crops Section -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-trophy me-2"></i> Top Performing Crops</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Crop Type</th>
+                                        <th>Average Yield (kg/ha)</th>
+                                        <th>Performance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for crop, yield in top_crops.items() %}
+                                    <tr>
+                                        <td><i class="fas fa-seedling text-success me-2"></i> {{ crop }}</td>
+                                        <td class="fw-bold">{{ yield }}</td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                {% set percentage = (yield / stats.max_yield * 100) if stats.max_yield else 0 %}
+                                                <div class="progress-bar bg-success" style="width: {{ percentage }}%">
+                                                    {{ "%.1f"|format(percentage) }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0"><i class="fas fa-lightbulb me-2"></i> Quick Insights</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="insight-item mb-3">
+                            <h6><i class="fas fa-temperature-high text-danger me-2"></i> Temperature Impact</h6>
+                            <p class="small text-muted">Optimal temperature range: 20-30°C</p>
+                        </div>
+                        <div class="insight-item mb-3">
+                            <h6><i class="fas fa-tint text-primary me-2"></i> Soil Moisture</h6>
+                            <p class="small text-muted">Ideal range: 40-60% moisture content</p>
+                        </div>
+                        <div class="insight-item mb-3">
+                            <h6><i class="fas fa-seedling text-success me-2"></i> Crop Health</h6>
+                            <p class="small text-muted">NDVI > 0.6 indicates healthy vegetation</p>
+                        </div>
+                        <div class="insight-item">
+                            <h6><i class="fas fa-shield-alt text-warning me-2"></i> Disease Control</h6>
+                            <p class="small text-muted">Early detection can prevent 30% yield loss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="container py-5">
+        <h2 class="text-center mb-5">Dashboard Features</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-chart-line fa-3x text-success"></i>
+                        </div>
+                        <h4 class="card-title">Interactive Analytics</h4>
+                        <p class="card-text">Explore farming data with interactive charts, graphs, and visualizations.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-robot fa-3x text-success"></i>
+                        </div>
+                        <h4 class="card-title">AI Predictions</h4>
+                        <p class="card-text">Predict crop yields using machine learning models trained on historical data.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card card h-100">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-map-marked-alt fa-3x text-success"></i>
+                        </div>
+                        <h4 class="card-title">Regional Analysis</h4>
+                        <p class="card-text">Compare performance across different regions and climate conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-light py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Ready to Optimize Your Farming?</h2>
+            <p class="lead mb-4">Start using our predictive analytics to make data-driven decisions.</p>
+            <a href="{{ url_for('predictions') }}" class="btn btn-success btn-lg">
+                <i class="fas fa-rocket me-2"></i> Get Started Now
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+    padding: 80px 0;
+}
+
+.hero-card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(46, 204, 113, 0.2);
+    background: white;
+}
+
+.stat-card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.feature-icon {
+    color: #2ecc71;
+}
+
+.insight-item {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #2ecc71;
+}
+</style>
+{% endblock %}

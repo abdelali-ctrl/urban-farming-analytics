@@ -1,0 +1,338 @@
+{% extends "layout.html" %}
+
+{% block title %}Data Analysis - Smart Farming{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="dashboard-header">
+                <h1 class="h3 mb-0"><i class="fas fa-chart-bar me-2"></i> Advanced Data Analysis</h1>
+                <p class="text-muted mb-0">Deep dive into farming data with statistical analysis</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Correlation Analysis -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-project-diagram me-2"></i> Correlation Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">X-Axis Variable</label>
+                            <select class="form-select" id="correlationX">
+                                <option value="soil_moisture_%">Soil Moisture (%)</option>
+                                <option value="temperature_C">Temperature (°C)</option>
+                                <option value="rainfall_mm">Rainfall (mm)</option>
+                                <option value="NDVI_index">NDVI Index</option>
+                                <option value="soil_pH">Soil pH</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Y-Axis Variable</label>
+                            <select class="form-select" id="correlationY">
+                                <option value="yield_kg_per_hectare" selected>Yield (kg/ha)</option>
+                                <option value="NDVI_index">NDVI Index</option>
+                                <option value="soil_moisture_%">Soil Moisture (%)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Color By</label>
+                            <select class="form-select" id="correlationColor">
+                                <option value="crop_type">Crop Type</option>
+                                <option value="region">Region</option>
+                                <option value="crop_disease_status">Disease Status</option>
+                                <option value="irrigation_type">Irrigation Type</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="correlationChart" style="height: 400px;"></div>
+                    <div class="mt-3">
+                        <div class="alert alert-info" id="correlationStats">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Correlation coefficient: <span id="correlationValue">0.00</span>
+                            | R²: <span id="rSquaredValue">0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time Series Analysis -->
+    <!--<div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i> Time Series Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Time Variable</label>
+                            <select class="form-select" id="timeVariable">
+                                <option value="sowing_month">Sowing Month</option>
+                                <option value="harvest_month">Harvest Month</option>
+                                <option value="total_days">Growing Days</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Metric to Analyze</label>
+                            <select class="form-select" id="timeMetric">
+                                <option value="yield_kg_per_hectare">Yield</option>
+                                <option value="temperature_C">Temperature</option>
+                                <option value="rainfall_mm">Rainfall</option>
+                                <option value="NDVI_index">NDVI</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Aggregation</label>
+                            <select class="form-select" id="timeAggregation">
+                                <option value="mean">Average</option>
+                                <option value="sum">Sum</option>
+                                <option value="median">Median</option>
+                                <option value="std">Standard Deviation</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Group By</label>
+                            <select class="form-select" id="timeGroup">
+                                <option value="crop_type">Crop Type</option>
+                                <option value="region">Region</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="timeSeriesChart" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+
+    <!-- Distribution Analysis -->
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i> Distribution Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <label class="form-label">Variable to Analyze</label>
+                            <select class="form-select" id="distributionVar">
+                                <option value="yield_kg_per_hectare">Yield</option>
+                                <option value="soil_moisture_%">Soil Moisture</option>
+                                <option value="temperature_C">Temperature</option>
+                                <option value="rainfall_mm">Rainfall</option>
+                                <option value="NDVI_index">NDVI</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Chart Type</label>
+                            <select class="form-select" id="distributionType">
+                                <option value="histogram">Histogram</option>
+                                <option value="box">Box Plot</option>
+                                <option value="violin">Violin Plot</option>
+                                <option value="density">Density Plot</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="distributionChart" style="height: 300px;"></div>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="stat-box">
+                                    <h6>Skewness</h6>
+                                    <div class="stat-value" id="skewnessValue">0.00</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-box">
+                                    <h6>Kurtosis</h6>
+                                    <div class="stat-value" id="kurtosisValue">0.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-area me-2"></i> Comparative Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Compare By</label>
+                            <select class="form-select" id="compareBy">
+                                <option value="crop_type">Crop Type</option>
+                                <option value="region">Region</option>
+                                <option value="irrigation_type">Irrigation Type</option>
+                                <option value="fertilizer_type">Fertilizer Type</option>
+                                <option value="crop_disease_status">Disease Status</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Metric</label>
+                            <select class="form-select" id="compareMetric">
+                                <option value="yield_kg_per_hectare">Yield</option>
+                                <option value="soil_moisture_%">Soil Moisture</option>
+                                <option value="NDVI_index">NDVI</option>
+                                <option value="temperature_C">Temperature</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="comparisonChart" style="height: 300px;"></div>
+                    <div class="mt-3">
+                        <button class="btn btn-sm btn-outline-success" onclick="runStatisticalTest()">
+                            <i class="fas fa-calculator me-1"></i> Run ANOVA Test
+                        </button>
+                        <div class="mt-2" id="testResults"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heatmap Analysis -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-th me-2"></i> Multi-dimensional Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label class="form-label">X-Axis</label>
+                            <select class="form-select" id="heatmapX">
+                                <option value="region">Region</option>
+                                <option value="crop_type">Crop Type</option>
+                                <option value="irrigation_type">Irrigation Type</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Y-Axis</label>
+                            <select class="form-select" id="heatmapY">
+                                <option value="crop_type">Crop Type</option>
+                                <option value="fertilizer_type">Fertilizer Type</option>
+                                <option value="crop_disease_status">Disease Status</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Metric</label>
+                            <select class="form-select" id="heatmapMetric">
+                                <option value="yield_kg_per_hectare">Yield</option>
+                                <option value="count">Count</option>
+                                <option value="temperature_C">Temperature</option>
+                                <option value="rainfall_mm">Rainfall</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Aggregation</label>
+                            <select class="form-select" id="heatmapAgg">
+                                <option value="mean">Average</option>
+                                <option value="sum">Sum</option>
+                                <option value="median">Median</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="heatmapChart" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistical Summary -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-table me-2"></i> Statistical Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="statisticalTable">
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Mean</th>
+                                    <th>Std Dev</th>
+                                    <th>Min</th>
+                                    <th>25%</th>
+                                    <th>50%</th>
+                                    <th>75%</th>
+                                    <th>Max</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-success" onclick="downloadStatisticalReport()">
+                            <i class="fas fa-download me-2"></i> Download Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.stat-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.analysis-controls {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/analysis.js') }}"></script>
+<script>
+$(document).ready(function() {
+    initializeAnalysis();
+    
+    // Load initial charts
+    loadCorrelationAnalysis();
+    loadTimeSeriesAnalysis();
+    loadDistributionAnalysis();
+    loadComparisonAnalysis();
+    loadHeatmapAnalysis();
+    loadStatisticalSummary();
+    
+    // Add event listeners
+    $('#correlationX, #correlationY, #correlationColor').change(loadCorrelationAnalysis);
+    $('#timeVariable, #timeMetric, #timeAggregation, #timeGroup').change(loadTimeSeriesAnalysis);
+    $('#distributionVar, #distributionType').change(loadDistributionAnalysis);
+    $('#compareBy, #compareMetric').change(loadComparisonAnalysis);
+    $('#heatmapX, #heatmapY, #heatmapMetric, #heatmapAgg').change(loadHeatmapAnalysis);
+});
+</script>
+{% endblock %}

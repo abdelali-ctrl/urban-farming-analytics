@@ -1,0 +1,94 @@
+Product,Form,AverageRetailPrice,AverageRetailPriceUnitOfMeasure,PreparationYieldFactor,SizeOfACupEquivalent,CupEquivalentUnitOfMeasure,AveragePricePerCupEquivalent,Category
+Acorn squash,Fresh,1.241438589,per pound,0.4586,0.4519,pounds,1.223533225,Vegetable
+Artichoke,Fresh,2.506855868,per pound,0.375,0.3858,pounds,2.080460852,Vegetable
+Artichoke,Canned,3.505101483,per pound,0.65,0.3858,pounds,2.579113206,Vegetable
+Asparagus,Fresh,3.212453364,per pound,0.4938,0.3968,pounds,2.581435739,Vegetable
+Asparagus,Canned,3.676296303,per pound,0.65,0.3968,pounds,2.244418891,Vegetable
+Asparagus,Frozen,6.780904794,per pound,1.0335,0.3968,pounds,2.603589725,Vegetable
+Avocados,Fresh,2.262402684,per pound,0.7408,0.3197,pounds,0.976334492,Vegetable
+Beets,Canned,1.257920081,per pound,0.65,0.3748,pounds,0.725308679,Vegetable
+Black beans,Canned,1.306312699,per pound,0.65,0.3858,pounds,0.775364834,Vegetable
+Black beans,Dried,1.658510355,per pound,2.4692,0.3858,pounds,0.259142243,Vegetable
+Blackeye peas,Canned,1.42085767,per pound,0.65,0.3748,pounds,0.819257451,Vegetable
+Blackeye peas,Dried,2.125516477,per pound,2.5397,0.3858,pounds,0.322886618,Vegetable
+Broccoli florets,Fresh,3.083131203,per pound,1.0,0.3417,pounds,1.053556824,Vegetable
+Broccoli heads,Fresh,3.023555459,per pound,0.78,0.3417,pounds,1.324613857,Vegetable
+Broccoli,Frozen,2.572513699,per pound,0.8818,0.3417,pounds,0.996849058,Vegetable
+Brussels sprouts,Fresh,3.039541765,per pound,1.06,0.3417,pounds,0.979869427,Vegetable
+Brussels sprouts,Frozen,2.885028256,per pound,0.96,0.3417,pounds,1.026939351,Vegetable
+Butternut squash,Fresh,1.270953317,per pound,0.714,0.4519,pounds,0.804487884,Vegetable
+"Cabbage, green",Fresh,0.826627116,per pound,0.7788,0.3307,pounds,0.351003021,Vegetable
+"Cabbage, red",Fresh,1.260671568,per pound,0.7791,0.3307,pounds,0.535094606,Vegetable
+"Cabbage, sauerkraut",Canned,1.630119528,per pound,0.65,0.3086,pounds,0.774048884,Vegetable
+"Carrots, cooked whole",Fresh,1.00554135,per pound,0.8158,0.3197,pounds,0.394004108,Vegetable
+"Carrots, raw whole",Fresh,1.00554135,per pound,0.89,0.2756,pounds,0.311353821,Vegetable
+"Carrots, baby",Fresh,1.463044321,per pound,1.0,0.2756,pounds,0.403182576,Vegetable
+Carrots,Canned,1.320606207,per pound,0.65,0.3197,pounds,0.649474702,Vegetable
+Carrots,Frozen,2.037831594,per pound,0.98,0.3197,pounds,0.664728772,Vegetable
+Cauliflower florets,Fresh,3.971328618,per pound,0.9702,0.2756,pounds,1.127980976,Vegetable
+Cauliflower heads,Fresh,2.124437278,per pound,0.8926,0.2756,pounds,0.655876448,Vegetable
+Cauliflower,Frozen,2.719124778,per pound,0.9304,0.2756,pounds,0.805427956,Vegetable
+"Celery, trimmed bunches",Fresh,1.327844847,per pound,0.73,0.2646,pounds,0.48121591,Vegetable
+Celery sticks,Fresh,2.650279098,per pound,1.0,0.2646,pounds,0.701143831,Vegetable
+Collard greens,Fresh,2.483338628,per pound,1.16,0.2866,pounds,0.613558,Vegetable
+Collard greens,Canned,1.416270591,per pound,0.65,0.3638,pounds,0.792594554,Vegetable
+Collard greens,Frozen,2.723966393,per pound,0.8818,0.3638,pounds,1.123636137,Vegetable
+Corn,Fresh,2.102763641,per pound,0.54,0.3638,pounds,1.416494534,Vegetable
+Corn,Canned,1.218782103,per pound,0.65,0.3638,pounds,0.68207309,Vegetable
+Corn,Frozen,1.825089043,per pound,0.963,0.3638,pounds,0.689422372,Vegetable
+Cucumbers with peel,Fresh,1.092848382,per pound,0.97,0.2646,pounds,0.298059992,Vegetable
+Cucumbers without peel,Fresh,1.092848382,per pound,0.73,0.2646,pounds,0.396052318,Vegetable
+Great northern beans,Canned,1.167251314,per pound,0.65,0.3858,pounds,0.692824637,Vegetable
+Great northern beans,Dried,1.872836969,per pound,2.4692,0.3858,pounds,0.292630776,Vegetable
+Green beans,Fresh,2.659189993,per pound,0.8466,0.2756,pounds,0.865621743,Vegetable
+Green beans,Canned,1.182933022,per pound,0.65,0.2976,pounds,0.54164511,Vegetable
+Green beans,Frozen,2.173343764,per pound,0.903,0.2976,pounds,0.716312032,Vegetable
+Green peas,Canned,1.421894276,per pound,0.65,0.3527,pounds,0.771628378,Vegetable
+Green peas,Frozen,2.191018173,per pound,0.8924,0.3527,pounds,0.866015088,Vegetable
+Green peppers,Fresh,1.503334589,per pound,0.82,0.2646,pounds,0.485017382,Vegetable
+Kale,Fresh,3.57112371,per pound,1.05,0.2866,pounds,0.974749919,Vegetable
+Kale,Frozen,2.28053379,per pound,0.8995,0.3638,pounds,0.922274695,Vegetable
+Kidney beans,Canned,1.199920223,per pound,0.65,0.3858,pounds,0.712215341,Vegetable
+Kidney beans,Dried,1.99633282,per pound,2.4692,0.3858,pounds,0.311927003,Vegetable
+Lentils,Dried,1.957697337,per pound,2.4692,0.3858,pounds,0.305890209,Vegetable
+"Lettuce, iceberg",Fresh,1.478386411,per pound,0.95,0.2425,pounds,0.377390794,Vegetable
+"Lettuce, romaine, heads",Fresh,2.43850297,per pound,0.94,0.2094,pounds,0.543317008,Vegetable
+"Lettuce, romaine, hearts",Fresh,3.029270006,per pound,0.85,0.2094,pounds,0.746409097,Vegetable
+Lima beans,Canned,1.627066597,per pound,0.65,0.3748,pounds,0.938156201,Vegetable
+Lima beans,Frozen,2.834837939,per pound,1.097,0.3748,pounds,0.403215155,Vegetable
+Lima beans,Dried,2.654307766,per pound,2.5397,0.3858,pounds,0.968493669,Vegetable
+"Mixed vegetables, peas and carrots",Canned,1.613335486,per pound,0.65,0.3392,pounds,0.841845185,Vegetable
+"Mixed vegetables, peas and carrots",Frozen,2.058864926,per pound,0.99,0.3392,pounds,0.705364443,Vegetable
+"Mixed vegetables, carrots, peas, corn, and green beans",Frozen,1.919265369,per pound,0.97,0.334,pounds,0.660927187,Vegetable
+"Mixed vegetables, broccoli, cauliflower, and carrots",Frozen,2.374324338,per pound,0.97,0.3105,pounds,0.760053601,Vegetable
+"Mushrooms, whole",Fresh,4.154521771,per pound,0.97,0.1543,pounds,0.660969781,Vegetable
+"Mushrooms, sliced",Fresh,4.006266272,per pound,1.0,0.1543,pounds,0.618261368,Vegetable
+Mustard greens,Canned,1.414656693,per pound,0.65,0.3307,pounds,0.719719419,Vegetable
+Mustard greens,Frozen,2.920188174,per pound,0.7478,0.3307,pounds,1.291356799,Vegetable
+Navy beans,Canned,1.234459073,per pound,0.65,0.3858,pounds,0.732715953,Vegetable
+Navy beans,Dried,1.705845988,per pound,2.4692,0.3858,pounds,0.266538436,Vegetable
+Okra,Fresh,5.680314126,per pound,0.7695,0.3527,pounds,2.603951096,Vegetable
+Okra,Frozen,2.652850328,per pound,0.8995,0.3748,pounds,1.105354303,Vegetable
+Olives,Canned,5.989003318,per pound,1.0,0.2976,pounds,1.782471447,Vegetable
+Onions,Fresh,1.062206305,per pound,0.9,0.3527,pounds,0.416313609,Vegetable
+Pinto beans,Canned,1.2121028,per pound,0.65,0.3858,pounds,0.719446337,Vegetable
+Pinto beans,Dried,1.502439243,per pound,2.4692,0.3858,pounds,0.234756132,Vegetable
+Potatoes,Fresh,0.921544199,per pound,0.8113,0.2646,pounds,0.300503543,Vegetable
+"Potatoes, french fries",Frozen,2.520906337,per pound,0.776,0.3417,pounds,1.110058188,Vegetable
+Potatoes,Canned,1.103743481,per pound,0.65,0.3417,pounds,0.580257486,Vegetable
+Pumpkin,Canned,2.080888289,per pound,1.0,0.5401,pounds,1.123955482,Vegetable
+Radish,Fresh,1.850976729,per pound,0.9,0.2756,pounds,0.566764607,Vegetable
+Red peppers,Fresh,1.705233347,per pound,0.82,0.2646,pounds,0.550155514,Vegetable
+"Spinach, boiled",Fresh,4.500420718,per pound,0.77,0.3307,pounds,1.932804413,Vegetable
+"Spinach, eaten raw",Fresh,4.500420718,per pound,1.0,0.1543,pounds,0.694521053,Vegetable
+Spinach,Canned,1.670872006,per pound,0.65,0.3748,pounds,0.96341412,Vegetable
+Spinach,Frozen,2.468972167,per pound,0.776,0.3748,pounds,1.192401331,Vegetable
+Sweet potatoes,Fresh,1.164626523,per pound,0.8818,0.4409,pounds,0.582313262,Vegetable
+"Tomatoes, grape and cherry",Fresh,4.155557011,per pound,0.91,0.3748,pounds,1.711476867,Vegetable
+"Tomatoes, Roma and plum",Fresh,1.235007071,per pound,0.91,0.3748,pounds,0.508640846,Vegetable
+"Tomatoes, large round",Fresh,2.142409751,per pound,0.91,0.3748,pounds,0.882356978,Vegetable
+Tomatoes,Canned,1.208159726,per pound,1.0,0.5401,pounds,0.652566384,Vegetable
+Turnip greens,Fresh,2.972110955,per pound,0.75,0.3197,pounds,1.266794055,Vegetable
+Turnip greens,Canned,1.397443153,per pound,0.65,0.3527,pounds,0.758359332,Vegetable
+Turnip greens,Frozen,2.919789615,per pound,0.776,0.3527,pounds,1.327177098,Vegetable
+Zucchini,Fresh,1.639076186,per pound,0.7695,0.3968,pounds,0.845273553,Vegetable

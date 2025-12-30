@@ -1,0 +1,402 @@
+{% extends "layout.html" %}
+
+{% block title %}Data Explorer - Smart Farming{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="dashboard-header">
+                <h1 class="h3 mb-0"><i class="fas fa-database me-2"></i> Data Explorer</h1>
+                <p class="text-muted mb-0">Visualisez et explorez vos données agricoles</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row g-2">
+                        <div class="col-md-3">
+                            <select class="form-select form-select-sm" id="simpleRegion">
+                                <option value="">Toutes les régions</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select form-select-sm" id="simpleCrop">
+                                <option value="">Toutes les cultures</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select form-select-sm" id="simpleDisease">
+                                <option value="">Tous les statuts</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-success" id="simpleFilter">
+                                    <i class="fas fa-filter"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" id="simpleReset">
+                                    <i class="fas fa-redo"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Summary -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card bg-light">
+                <div class="card-body py-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="badge bg-success">Total: <span id="dataCount">0</span> enregistrements</span>
+                            <span class="badge bg-info ms-2">Rendement moyen: <span id="avgYield">0</span> kg/ha</span>
+                        </div>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" id="exportData">
+                                <i class="fas fa-download me-1"></i> Exporter CSV
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Région</th>
+                                    <th>Culture</th>
+                                    <th>Rendement</th>
+                                    <th>Humidité</th>
+                                    <th>Température</th>
+                                    <th>Précipitations</th>
+                                    <th>Maladie</th>
+                                    <th>Irrigation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3">
+                        <nav>
+                            <ul class="pagination pagination-sm justify-content-center" id="pagination">
+                                <!-- Pagination will be added here -->
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Simple Data Explorer
+let allData = [];
+let filteredData = [];
+let currentPage = 1;
+const pageSize = 20;
+
+$(document).ready(function() {
+    loadData();
+});
+
+function loadData() {
+    $.ajax({
+        url: '/api/data/all',
+        type: 'GET',
+        success: function(response) {
+            if (response.success && response.data) {
+                allData = response.data;
+                filteredData = [...allData];
+                
+                // Populate filters
+                populateFilters();
+                
+                // Display data
+                updateTable();
+                updateSummary();
+                
+            } else {
+                showError('Erreur de chargement des données');
+            }
+        },
+        error: function() {
+            showError('Impossible de charger les données');
+        }
+    });
+}
+
+function populateFilters() {
+    // Get unique values
+    const regions = [...new Set(allData.map(d => d.region))].sort();
+    const crops = [...new Set(allData.map(d => d.crop_type))].sort();
+    const diseases = [...new Set(allData.map(d => d.crop_disease_status))].sort();
+    
+    // Populate dropdowns
+    populateDropdown('#simpleRegion', regions);
+    populateDropdown('#simpleCrop', crops);
+    populateDropdown('#simpleDisease', diseases);
+    
+    // Setup event listeners
+    $('#simpleFilter').click(applyFilters);
+    $('#simpleReset').click(resetFilters);
+    $('#exportData').click(exportCSV);
+}
+
+function populateDropdown(selector, options) {
+    const dropdown = $(selector);
+    dropdown.empty();
+    dropdown.append('<option value="">Tous</option>');
+    
+    options.forEach(option => {
+        if (option && option.toString().trim() !== '') {
+            dropdown.append(`<option value="${option}">${option}</option>`);
+        }
+    });
+}
+
+function applyFilters() {
+    const region = $('#simpleRegion').val();
+    const crop = $('#simpleCrop').val();
+    const disease = $('#simpleDisease').val();
+    
+    filteredData = allData.filter(item => {
+        let match = true;
+        if (region && item.region !== region) match = false;
+        if (crop && item.crop_type !== crop) match = false;
+        if (disease && item.crop_disease_status !== disease) match = false;
+        return match;
+    });
+    
+    currentPage = 1;
+    updateTable();
+    updateSummary();
+}
+
+function resetFilters() {
+    $('#simpleRegion').val('');
+    $('#simpleCrop').val('');
+    $('#simpleDisease').val('');
+    
+    filteredData = [...allData];
+    currentPage = 1;
+    updateTable();
+    updateSummary();
+}
+
+function updateTable() {
+    const tbody = $('#dataTable tbody');
+    
+    if (filteredData.length === 0) {
+        tbody.html(`
+            <tr>
+                <td colspan="9" class="text-center py-4 text-muted">
+                    <i class="fas fa-database fa-2x mb-3"></i>
+                    <p>Aucune donnée trouvée</p>
+                </td>
+            </tr>
+        `);
+        updatePagination();
+        return;
+    }
+    
+    // Calculate pagination
+    const totalPages = Math.ceil(filteredData.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = Math.min(startIndex + pageSize, filteredData.length);
+    const pageData = filteredData.slice(startIndex, endIndex);
+    
+    // Build table
+    let html = '';
+    pageData.forEach((item, index) => {
+        const rowIndex = startIndex + index + 1;
+        
+        // Format yield with color
+        const yieldValue = item.yield_kg_per_hectare || 0;
+        let yieldClass = 'text-muted';
+        if (yieldValue >= 5000) yieldClass = 'text-success fw-bold';
+        else if (yieldValue >= 3000) yieldClass = 'text-warning';
+        else if (yieldValue > 0) yieldClass = 'text-danger';
+        
+        // Format disease status
+        const diseaseStatus = item.crop_disease_status || 'Unknown';
+        let diseaseBadge = 'bg-secondary';
+        if (diseaseStatus.includes('No Disease')) diseaseBadge = 'bg-success';
+        else if (diseaseStatus.includes('Mild')) diseaseBadge = 'bg-info';
+        else if (diseaseStatus.includes('Moderate')) diseaseBadge = 'bg-warning';
+        else if (diseaseStatus.includes('Severe')) diseaseBadge = 'bg-danger';
+        
+        html += `
+            <tr>
+                <td><small>${item.farm_id || rowIndex}</small></td>
+                <td>${item.region || '-'}</td>
+                <td>${item.crop_type || '-'}</td>
+                <td class="${yieldClass}">${formatNumber(yieldValue)}</td>
+                <td>${formatNumber(item.soil_moisture_)}%</td>
+                <td>${formatNumber(item.temperature_C)}°C</td>
+                <td>${formatNumber(item.rainfall_mm)}mm</td>
+                <td><span class="badge ${diseaseBadge}">${diseaseStatus}</span></td>
+                <td><small>${item.irrigation_type || '-'}</small></td>
+            </tr>
+        `;
+    });
+    
+    tbody.html(html);
+    updatePagination();
+}
+
+function updatePagination() {
+    const pagination = $('#pagination');
+    const totalPages = Math.ceil(filteredData.length / pageSize);
+    
+    if (totalPages <= 1) {
+        pagination.empty();
+        return;
+    }
+    
+    let html = '';
+    
+    // Previous button
+    html += `
+        <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+        </li>
+    `;
+    
+    // Page numbers (show max 5 pages)
+    const maxPages = 5;
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, startPage + maxPages - 1);
+    
+    if (endPage - startPage + 1 < maxPages) {
+        startPage = Math.max(1, endPage - maxPages + 1);
+    }
+    
+    for (let i = startPage; i <= endPage; i++) {
+        html += `
+            <li class="page-item ${i === currentPage ? 'active' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+            </li>
+        `;
+    }
+    
+    // Next button
+    html += `
+        <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+            <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </li>
+    `;
+    
+    pagination.html(html);
+}
+
+function changePage(page) {
+    const totalPages = Math.ceil(filteredData.length / pageSize);
+    if (page < 1 || page > totalPages) return;
+    
+    currentPage = page;
+    updateTable();
+    
+    // Scroll to top of table
+    $('html, body').animate({
+        scrollTop: $('#dataTable').offset().top - 100
+    }, 300);
+}
+
+function updateSummary() {
+    $('#dataCount').text(filteredData.length.toLocaleString());
+    
+    // Calculate average yield
+    const yields = filteredData
+        .map(d => parseFloat(d.yield_kg_per_hectare))
+        .filter(v => !isNaN(v));
+    
+    const avg = yields.length > 0 
+        ? yields.reduce((a, b) => a + b, 0) / yields.length 
+        : 0;
+    
+    $('#avgYield').text(avg.toFixed(0));
+}
+
+function exportCSV() {
+    if (filteredData.length === 0) {
+        alert('Aucune donnée à exporter');
+        return;
+    }
+    
+    // Create CSV content
+    const headers = ['ID', 'Région', 'Culture', 'Rendement (kg/ha)', 'Humidité (%)', 'Température (°C)', 'Précipitations (mm)', 'Maladie', 'Irrigation'];
+    let csvContent = headers.join(',') + '\n';
+    
+    filteredData.forEach(item => {
+        const row = [
+            item.farm_id || '',
+            item.region || '',
+            item.crop_type || '',
+            item.yield_kg_per_hectare || '',
+            item.soil_moisture_ || '',
+            item.temperature_C || '',
+            item.rainfall_mm || '',
+            item.crop_disease_status || '',
+            item.irrigation_type || ''
+        ];
+        csvContent += row.join(',') + '\n';
+    });
+    
+    // Download file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `donnees_agricoles_${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
+// Helper functions
+function formatNumber(num) {
+    if (num === undefined || num === null || isNaN(num)) return '-';
+    const n = parseFloat(num);
+    return Number.isInteger(n) ? n : n.toFixed(1);
+}
+
+function showError(message) {
+    const alert = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+    $('.container-fluid').prepend(alert);
+}
+</script>
+{% endblock %}

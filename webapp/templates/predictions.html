@@ -1,0 +1,418 @@
+{% extends "layout.html" %}
+
+{% block title %}Yield Predictions - Smart Farming{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="dashboard-header">
+                <h1 class="h3 mb-0"><i class="fas fa-calculator me-2"></i> Crop Yield Prediction</h1>
+                <p class="text-muted mb-0">Predict crop yield using machine learning models</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Prediction Form -->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-edit me-2"></i> Input Parameters</h5>
+                </div>
+                <div class="card-body">
+                    <form id="predictionForm">
+                        <div class="row g-3">
+                            <!-- Farm Details -->
+                            <div class="col-md-6">
+                                <label class="form-label">Region *</label>
+                                <select class="form-select" id="region" required>
+                                    <option value="">Select Region</option>
+                                    {% for region in regions %}
+                                    <option value="{{ region }}">{{ region }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Crop Type *</label>
+                                <select class="form-select" id="crop_type" required>
+                                    <option value="">Select Crop</option>
+                                    {% for crop in crop_types %}
+                                    <option value="{{ crop }}">{{ crop }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Climate Conditions -->
+                            <div class="col-md-4">
+                                <label class="form-label">Soil Moisture (%) *</label>
+                                <input type="number" class="form-control" id="soil_moisture" 
+                                       min="0" max="100" step="0.1" value="50" required>
+                                <div class="form-text">Optimal: 40-60%</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Soil pH *</label>
+                                <input type="number" class="form-control" id="soil_pH" 
+                                       min="4" max="9" step="0.1" value="6.5" required>
+                                <div class="form-text">Optimal: 6.0-7.0</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Temperature (°C) *</label>
+                                <input type="number" class="form-control" id="temperature" 
+                                       min="-10" max="50" step="0.1" value="25" required>
+                                <div class="form-text">Optimal: 20-30°C</div>
+                            </div>
+
+                            <!-- Water Conditions -->
+                            <div class="col-md-6">
+                                <label class="form-label">Rainfall (mm) *</label>
+                                <input type="number" class="form-control" id="rainfall" 
+                                       min="0" max="2000" step="1" value="500" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Humidity (%) *</label>
+                                <input type="number" class="form-control" id="humidity" 
+                                       min="0" max="100" step="0.1" value="65" required>
+                            </div>
+
+                            <!-- Growing Conditions -->
+                            <div class="col-md-4">
+                                <label class="form-label">Sunlight Hours *</label>
+                                <input type="number" class="form-control" id="sunlight_hours" 
+                                       min="0" max="24" step="0.1" value="8" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Pesticide Usage (ml) *</label>
+                                <input type="number" class="form-control" id="pesticide_usage" 
+                                       min="0" max="1000" step="1" value="100" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">NDVI Index *</label>
+                                <input type="number" class="form-control" id="NDVI_index" 
+                                       min="0" max="1" step="0.01" value="0.7" required>
+                                <div class="form-text">Vegetation health index</div>
+                            </div>
+
+                            <!-- Management Practices -->
+                            <div class="col-md-4">
+                                <label class="form-label">Growing Period (days) *</label>
+                                <input type="number" class="form-control" id="total_days" 
+                                       min="30" max="365" step="1" value="120" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Irrigation Type *</label>
+                                <select class="form-select" id="irrigation_type" required>
+                                    <option value="">Select Type</option>
+                                    {% for irrigation in irrigation_types %}
+                                    <option value="{{ irrigation }}">{{ irrigation }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Fertilizer Type *</label>
+                                <select class="form-select" id="fertilizer_type" required>
+                                    <option value="">Select Type</option>
+                                    {% for fertilizer in fertilizer_types %}
+                                    <option value="{{ fertilizer }}">{{ fertilizer }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <!-- Disease Status -->
+                            <div class="col-md-6">
+                                <label class="form-label">Crop Disease Status *</label>
+                                <select class="form-select" id="disease_status" required>
+                                    <option value="No Disease">No Disease</option>
+                                    <option value="Mild">Mild</option>
+                                    <option value="Moderate">Moderate</option>
+                                    <option value="Severe">Severe</option>
+                                </select>
+                            </div>
+
+                            <!-- Quick Fill Buttons -->
+                            <div class="col-md-6">
+                                <label class="form-label">Quick Fill</label>
+                                <div class="btn-group w-100" role="group">
+                                    <button type="button" class="btn btn-outline-success" onclick="fillOptimalValues()">
+                                        Optimal
+                                    </button>
+                                    <button type="button" class="btn btn-outline-warning" onclick="fillAverageValues()">
+                                        Average
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger" onclick="fillPoorValues()">
+                                        Poor
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success btn-lg w-100" id="predictBtn">
+                                <i class="fas fa-calculator me-2"></i> Predict Yield
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="col-lg-6">
+            <!-- Prediction Result -->
+            <div class="card mb-4" id="resultCard" style="display: none;">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-chart-line me-2"></i> Prediction Results</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="prediction-value display-4 fw-bold text-success" id="predictionValue">
+                            0 kg/ha
+                        </div>
+                        <div class="confidence-badge">
+                            <span class="badge bg-info" id="confidenceBadge">
+                                Confidence: 0%
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-chart-bar me-2"></i> Performance Comparison</h6>
+                                    <div id="performanceChart" style="height: 150px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6><i class="fas fa-bullseye me-2"></i> Target Achievement</h6>
+                                    <div class="text-center mt-3">
+                                        <div class="circular-progress">
+                                            <svg width="100" height="100" viewBox="0 0 100 100">
+                                                <circle cx="50" cy="50" r="45" fill="none" stroke="#e0e0e0" stroke-width="10"/>
+                                                <circle id="progressCircle" cx="50" cy="50" r="45" fill="none" 
+                                                        stroke="#2ecc71" stroke-width="10" stroke-linecap="round" 
+                                                        stroke-dasharray="283" stroke-dashoffset="283"/>
+                                            </svg>
+                                            <div class="progress-text">
+                                                <span id="targetPercentage">0%</span>
+                                            </div>
+                                        </div>
+                                        <p class="mt-2 mb-0" id="targetText">of regional average</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Similar Farms -->
+                    <div class="mt-4">
+                        <h6><i class="fas fa-tractor me-2"></i> Similar Farms</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm" id="similarFarmsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Farm ID</th>
+                                        <th>Yield</th>
+                                        <th>Similarity</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="card" id="recommendationsCard" style="display: none;">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i> Recommendations</h5>
+                </div>
+                <div class="card-body">
+                    <div id="recommendationsList">
+                        <!-- Recommendations will be added here -->
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-outline-success btn-sm" onclick="showAllRecommendations()">
+                            <i class="fas fa-list me-1"></i> Show All Recommendations
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prediction History -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-history me-2"></i> Recent Predictions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm" id="predictionHistory">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Crop</th>
+                                    <th>Predicted</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sensitivity Analysis -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-sliders-h me-2"></i> Sensitivity Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">See how changes in key parameters affect predicted yield:</p>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-label">Soil Moisture (%)</label>
+                            <input type="range" class="form-range" id="moistureSensitivity" min="20" max="80" value="50">
+                            <div class="text-center">
+                                <span id="moistureValue">50%</span>
+                                <span class="text-muted"> → </span>
+                                <span id="moistureYield">0 kg/ha</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Temperature (°C)</label>
+                            <input type="range" class="form-range" id="tempSensitivity" min="10" max="40" value="25">
+                            <div class="text-center">
+                                <span id="tempValue">25°C</span>
+                                <span class="text-muted"> → </span>
+                                <span id="tempYield">0 kg/ha</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Rainfall (mm)</label>
+                            <input type="range" class="form-range" id="rainSensitivity" min="200" max="1200" value="500">
+                            <div class="text-center">
+                                <span id="rainValue">500mm</span>
+                                <span class="text-muted"> → </span>
+                                <span id="rainYield">0 kg/ha</span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">NDVI Index</label>
+                            <input type="range" class="form-range" id="ndviSensitivity" min="0.3" max="0.9" step="0.01" value="0.7">
+                            <div class="text-center">
+                                <span id="ndviValue">0.7</span>
+                                <span class="text-muted"> → </span>
+                                <span id="ndviYield">0 kg/ha</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <canvas id="sensitivityChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.circular-progress {
+    position: relative;
+    display: inline-block;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.recommendation-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #2ecc71;
+}
+
+.recommendation-item.high {
+    border-left-color: #e74c3c;
+}
+
+.recommendation-item.medium {
+    border-left-color: #f39c12;
+}
+
+.recommendation-item.low {
+    border-left-color: #3498db;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/predictions.js') }}"></script>
+<script>
+// Quick fill functions
+function fillOptimalValues() {
+    $('#soil_moisture').val(55);
+    $('#soil_pH').val(6.5);
+    $('#temperature').val(25);
+    $('#rainfall').val(600);
+    $('#humidity').val(65);
+    $('#sunlight_hours').val(8.5);
+    $('#NDVI_index').val(0.75);
+    $('#disease_status').val('No Disease');
+    $('#irrigation_type').val('Drip');
+    $('#fertilizer_type').val('Organic');
+}
+
+function fillAverageValues() {
+    $('#soil_moisture').val(50);
+    $('#soil_pH').val(6.2);
+    $('#temperature').val(22);
+    $('#rainfall').val(500);
+    $('#humidity').val(60);
+    $('#sunlight_hours').val(7.5);
+    $('#NDVI_index').val(0.65);
+    $('#disease_status').val('No Disease');
+    $('#irrigation_type').val('Sprinkler');
+    $('#fertilizer_type').val('NPK');
+}
+
+function fillPoorValues() {
+    $('#soil_moisture').val(35);
+    $('#soil_pH').val(5.8);
+    $('#temperature').val(18);
+    $('#rainfall').val(300);
+    $('#humidity').val(50);
+    $('#sunlight_hours').val(6);
+    $('#NDVI_index').val(0.45);
+    $('#disease_status').val('Moderate');
+    $('#irrigation_type').val('Flood');
+    $('#fertilizer_type').val('Urea');
+}
+
+// Initialize form
+$(document).ready(function() {
+    initializePredictionForm();
+});
+</script>
+{% endblock %}
