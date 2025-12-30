@@ -1,4 +1,4 @@
-# 🌾 Urban Farming Optimization System
+# Urban Farming Optimization System
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python">
@@ -16,19 +16,20 @@
 
 ## Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Architecture](#-architecture)
-- [Project Structure](#-project-structure)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Machine Learning Models](#-machine-learning-models)
-- [Data Mining](#-data-mining)
-- [Web Application](#-web-application)
-- [ETL Pipeline](#-etl-pipeline)
-- [Technologies](#-technologies)
-- [Screenshots](#-screenshots)
-- [License](#-license)
+- [Overview](#overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Machine Learning Models](#machine-learning-models)
+- [Data Mining](#data-mining)
+- [Web Application](#web-application)
+- [ETL Pipeline](#etl-pipeline)
+- [Technologies](#technologies)
+- [Screenshots](#screenshots)
+- [Crop Types Supported](#crop-types-supported)
+- [License](#license)
 
 ---
 
@@ -335,6 +336,6 @@ validate_source_data → process_data → retrain_models → log_pipeline_succes
 
 ## License
 
-This project is for **educational purposes** as part of the Data Mining course at UEMF (2024-2025).
+This project is for **educational purposes** as part of my  Big Data Analytics ingeneering course.
 
 ---
