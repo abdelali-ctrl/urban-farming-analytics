@@ -336,6 +336,6 @@ validate_source_data → process_data → retrain_models → log_pipeline_succes
 
 ## License
 
-This project is for **educational purposes** as part of my  Big Data Analytics ingeneering course.
+This project is for **educational purposes** as part of my  Big Data Analytics engeneering course.
 
 ---
